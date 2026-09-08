@@ -31,5 +31,4 @@ public class Computer {
         this.warrantyYears = warrantyYears;
         this.monitor = monitor;
     }
-
 }

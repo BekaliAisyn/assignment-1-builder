@@ -8,5 +8,4 @@ public class Monitor {
         this.size = size;
         this.resolution = resolution;
     }
-
 }
