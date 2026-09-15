@@ -114,6 +114,26 @@ public class Computer {
         }
 
         public Computer build() {
+            if (ram <= 0) {
+                throw new IllegalArgumentException("RAM must be greater than 0");
+            }
+
+            if (storage <= 0) {
+                throw new IllegalArgumentException("Storage must be greater than 0");
+            }
+
+            if (cpu == null || cpu.trim().isEmpty()) {
+                throw new IllegalArgumentException("CPU cannot be empty");
+            }
+
+            if (gamingMode && gpu.equals("Integrated Graphics")) {
+                throw new IllegalArgumentException("Gaming mode requires a dedicated GPU, not integrated graphics");
+            }
+
+            if (gamingMode && ram < 16) {
+                throw new IllegalArgumentException("Gaming mode requires at least 16GB RAM");
+            }
+
             return new Computer(this);
         }
     }

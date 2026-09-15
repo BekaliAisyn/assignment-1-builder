@@ -19,5 +19,13 @@ public class Main {
         System.out.println("GPU: " + myComputer.getGpu());
         System.out.println("Monitor: " + myComputer.getMonitor().brand + " " + myComputer.getMonitor().size + "\"");
 
+        try {
+            Computer badComputer = new Computer.Builder("Intel i3", 4, 256, "Windows 11")
+                    .gamingMode(true)
+                    .build();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Validation caught error: " + e.getMessage());
+        }
+
     }
 }
