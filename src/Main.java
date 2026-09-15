@@ -26,6 +26,13 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("Validation caught error: " + e.getMessage());
         }
+        Computer budgetPC = Computer.budget();
+        Computer gamingPC = Computer.gaming();
+        Computer workstationPC = Computer.workstation();
+
+        System.out.println("Budget PC: " + budgetPC.getCpu() + ", " + budgetPC.getRam() + "GB");
+        System.out.println("Gaming PC: " + gamingPC.getCpu() + ", " + gamingPC.getRam() + "GB");
+        System.out.println("Workstation PC: " + workstationPC.getCpu() + ", " + workstationPC.getRam() + "GB");
 
     }
 }

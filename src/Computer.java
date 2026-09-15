@@ -45,6 +45,33 @@ public class Computer {
     public int getWarrantyYears() { return warrantyYears; }
     public Monitor getMonitor() { return monitor; }
 
+    public static Computer budget() {
+        return new Builder("Intel i3-12100", 8, 256, "Windows 11 Home")
+                .gpu("Integrated Graphics")
+                .wifi(true)
+                .warrantyYears(1)
+                .build();
+    }
+
+    public static Computer gaming() {
+        return new Builder("Core i9-13900H", 32, 1024, "Windows 11 Pro")
+                .gpu("Nvidia RTX 4070")
+                .wifi(true)
+                .bluetooth(true)
+                .gamingMode(true)
+                .warrantyYears(2)
+                .build();
+    }
+
+    public static Computer workstation() {
+        return new Builder("AMD Ryzen 9 7950X", 64, 2048, "Windows 11 Pro")
+                .gpu("Nvidia RTX 4090")
+                .wifi(true)
+                .bluetooth(true)
+                .warrantyYears(3)
+                .build();
+    }
+
     public static class Builder {
         private final String cpu;
         private final int ram;
