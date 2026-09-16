@@ -1,5 +1,6 @@
 public class Computer {
 
+    private static final String DEFAULT_GPU = "Integrated Graphics";
     private final String cpu;
     private final int ram;
     private final int storage;
@@ -48,7 +49,7 @@ public class Computer {
     public static Computer budget() {
         return new Builder("Intel i3-12100", 8, 256, "Windows 11 Home")
                 .gpu("Integrated Graphics")
-                .wifi(true)
+                .enableWifi()
                 .warrantyYears(1)
                 .build();
     }
@@ -56,7 +57,7 @@ public class Computer {
     public static Computer gaming() {
         return new Builder("Core i9-13900H", 32, 1024, "Windows 11 Pro")
                 .gpu("Nvidia RTX 4070")
-                .wifi(true)
+                .enableWifi()
                 .bluetooth(true)
                 .gamingMode(true)
                 .warrantyYears(2)
@@ -66,7 +67,7 @@ public class Computer {
     public static Computer workstation() {
         return new Builder("AMD Ryzen 9 7950X", 64, 2048, "Windows 11 Pro")
                 .gpu("Nvidia RTX 4090")
-                .wifi(true)
+                .enableWifi()
                 .bluetooth(true)
                 .warrantyYears(3)
                 .build();
@@ -78,7 +79,7 @@ public class Computer {
         private final int storage;
         private final String operatingSystem;
 
-        private String gpu = "Integrated Graphics";
+        private String gpu = DEFAULT_GPU;
         private double screenSize = 24.0;
         private boolean wifi = false;
         private boolean bluetooth = false;
@@ -105,8 +106,8 @@ public class Computer {
             return this;
         }
 
-        public Builder wifi(boolean wifi) {
-            this.wifi = wifi;
+        public Builder enableWifi() {
+            this.wifi = true;
             return this;
         }
 
@@ -141,27 +142,30 @@ public class Computer {
         }
 
         public Computer build() {
+            validateSingleFields();
+            validateCrossFieldRules();
+            return new Computer(this);
+        }
+
+        private void validateSingleFields() {
             if (ram <= 0) {
                 throw new IllegalArgumentException("RAM must be greater than 0");
             }
-
             if (storage <= 0) {
                 throw new IllegalArgumentException("Storage must be greater than 0");
             }
-
             if (cpu == null || cpu.trim().isEmpty()) {
                 throw new IllegalArgumentException("CPU cannot be empty");
             }
+        }
 
-            if (gamingMode && gpu.equals("Integrated Graphics")) {
+        private void validateCrossFieldRules() {
+            if (gamingMode && gpu.equals(DEFAULT_GPU)) {
                 throw new IllegalArgumentException("Gaming mode requires a dedicated GPU, not integrated graphics");
             }
-
             if (gamingMode && ram < 16) {
                 throw new IllegalArgumentException("Gaming mode requires at least 16GB RAM");
             }
-
-            return new Computer(this);
         }
     }
 }

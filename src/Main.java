@@ -5,7 +5,7 @@ public class Main {
         Computer myComputer = new Computer.Builder("Core i9-13900H", 16, 1024, "Windows 11 pro")
                 .gpu("Nvidia RTX 4060")
                 .screenSize(27.0)
-                .wifi(true)
+                .enableWifi()
                 .bluetooth(true)
                 .keyboard(true)
                 .mouse(true)
